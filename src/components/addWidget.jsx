@@ -3,6 +3,7 @@ import { Modal } from "semantic-ui-react";
 import categories from "../utils/dashboard";
 import { useSelector, useDispatch } from "react-redux";
 import { addWidget } from "../store/widgetSlice";
+import PropTypes from "prop-types";
 
 const AddWidget = ({ showAddWidget, cancel }) => {
   const [widgetName, setWidgetName] = useState("");
@@ -20,7 +21,7 @@ const AddWidget = ({ showAddWidget, cancel }) => {
       dispatch(
         addWidget({ categoryId: selectedCategoryId, widget: newWidget })
       );
-      cancel(); 
+      cancel();
     } else {
       alert("Please fill out all fields.");
     }
@@ -75,6 +76,11 @@ const AddWidget = ({ showAddWidget, cancel }) => {
       </div>
     </Modal>
   );
+};
+
+AddWidget.propTypes = {
+  showAddWidget: PropTypes.bool.isRequired,
+  cancel: PropTypes.func.isRequired,
 };
 
 export default AddWidget;

@@ -1,5 +1,6 @@
 import { Icon } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const Navbar = ({ searchQuery, onSearch }) => {
   const handleSearchChange = (e) => {
@@ -41,6 +42,11 @@ const Navbar = ({ searchQuery, onSearch }) => {
       </div>
     </div>
   );
+};
+
+Navbar.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default Navbar;

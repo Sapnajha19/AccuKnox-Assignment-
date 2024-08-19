@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const Widget = ({ category, open, customize }) => {
   return (
     <div className=" ">
@@ -24,6 +26,22 @@ const Widget = ({ category, open, customize }) => {
       </div>
     </div>
   );
+};
+
+Widget.propTypes = {
+  category: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    widgets: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+          .isRequired,
+        name: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+  open: PropTypes.func.isRequired,
+  customize: PropTypes.func.isRequired,
 };
 
 export default Widget;

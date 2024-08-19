@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Icon, Modal, Tab, Checkbox } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeWidget } from "../store/widgetSlice";
+import PropTypes from "prop-types";
 
 const WidgetCustomization = ({ showWidget, close }) => {
   const dispatch = useDispatch();
@@ -92,6 +93,11 @@ const WidgetCustomization = ({ showWidget, close }) => {
       </div>
     </Modal>
   );
+};
+
+WidgetCustomization.propTypes = {
+  showWidget: PropTypes.bool.isRequired,
+  close: PropTypes.func.isRequired,
 };
 
 export default WidgetCustomization;

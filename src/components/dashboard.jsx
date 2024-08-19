@@ -4,6 +4,7 @@ import { useState } from "react";
 import Widget from "./widget";
 import AddWidget from "./addWidget";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 const Dashboard = ({ searchQuery }) => {
   const [showAddWidget, setShowAddWidget] = useState(false);
@@ -94,6 +95,10 @@ const Dashboard = ({ searchQuery }) => {
       />
     </div>
   );
+};
+
+Dashboard.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
 };
 
 export default Dashboard;
