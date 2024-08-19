@@ -10,7 +10,6 @@ const Dashboard = ({ searchQuery }) => {
   const [showAddWidget, setShowAddWidget] = useState(false);
   const [showWidget, setShowWidget] = useState(false);
   const categories = useSelector((state) => state.widget.categories);
-  console.log("cat:", categories);
   const handleAddWidget = () => {
     setShowAddWidget(true);
   };

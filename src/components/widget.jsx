@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const Widget = ({ category, open, customize }) => {
   return (
-    <div className=" ">
+    <div>
       <p className="pb-2 font-bold">{category?.name}</p>
       <div className="flex flex-row gap-5 ">
         {category?.widgets?.map((item) => (

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal } from "semantic-ui-react";
 import categories from "../utils/dashboard";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addWidget } from "../store/widgetSlice";
 import PropTypes from "prop-types";
 
@@ -26,9 +26,7 @@ const AddWidget = ({ showAddWidget, cancel }) => {
       alert("Please fill out all fields.");
     }
   };
-  const currentCategories = useSelector((state) => state.widget.categories);
 
-  console.log("Current categories:", currentCategories);
   return (
     <Modal open={showAddWidget} onClose={cancel} closeIcon>
       <p className="font-bold p-3 bg-[#040468] text-[#fff]">Add Widget</p>
