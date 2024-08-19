@@ -9,15 +9,17 @@ const WidgetCustomization = ({ showWidget, close }) => {
   const categories = useSelector((state) => state.widget.categories);
   const [checkedWidgets, setCheckedWidgets] = useState({});
   useEffect(() => {
-    const updatedCheckedWidgets = categories.reduce((acc, category) => {
-      acc[category.id] = category.widgets.reduce((wAcc, widget) => {
-        wAcc[widget.id] = checkedWidgets[category.id]?.[widget.id] ?? true;
-        return wAcc;
+    if (categories.length > 0) {
+      const updatedCheckedWidgets = categories.reduce((acc, category) => {
+        acc[category.id] = category.widgets.reduce((wAcc, widget) => {
+          wAcc[widget.id] = true; // Initialize all widgets as checked
+          return wAcc;
+        }, {});
+        return acc;
       }, {});
-      return acc;
-    }, {});
-    setCheckedWidgets(updatedCheckedWidgets);
-  }, [categories, checkedWidgets]);
+      setCheckedWidgets(updatedCheckedWidgets);
+    }
+  }, [categories]);
   const handleToggle = (categoryId, widgetId) => {
     setCheckedWidgets((prevState) => ({
       ...prevState,
