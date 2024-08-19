@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeWidget } from "../store/widgetSlice";
 import PropTypes from "prop-types";
 
-const WidgetCustomization = ({ showWidget, close }) => {
+const WidgetCustomization = ({ showCustomization, close, categoryId }) => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.widget.categories);
   const [checkedWidgets, setCheckedWidgets] = useState({});
+  const [activeIndex, setActiveIndex] = useState(0);
   useEffect(() => {
     if (categories.length > 0) {
       const updatedCheckedWidgets = categories.reduce((acc, category) => {
@@ -20,6 +21,14 @@ const WidgetCustomization = ({ showWidget, close }) => {
       setCheckedWidgets(updatedCheckedWidgets);
     }
   }, [categories]);
+  useEffect(() => {
+    const defaultCategoryIndex = categories.findIndex(
+      (category) => category.id === categoryId
+    );
+    if (defaultCategoryIndex !== -1) {
+      setActiveIndex(defaultCategoryIndex);
+    }
+  }, [categoryId, categories]);
   const handleToggle = (categoryId, widgetId) => {
     setCheckedWidgets((prevState) => ({
       ...prevState,
@@ -64,7 +73,7 @@ const WidgetCustomization = ({ showWidget, close }) => {
   }));
   return (
     <Modal
-      open={showWidget}
+      open={showCustomization}
       onClose={close}
       className="h-full bg-[#fff] absolute right-0 top-[-12px]"
     >
@@ -77,8 +86,12 @@ const WidgetCustomization = ({ showWidget, close }) => {
       <p className="p-3 font-semibold">
         Personalize you dashboard by adding the following widget
       </p>
-      {/* <WidgetTabs /> */}
-      <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+      <Tab
+        menu={{ secondary: true, pointing: true }}
+        panes={panes}
+        activeIndex={activeIndex}
+        onTabChange={(_, { activeIndex }) => setActiveIndex(activeIndex)}
+      />
       <div className="absolute bottom-2 right-2">
         <button
           className="border border-[#01123d] rounded-md p-2.5"
@@ -98,8 +111,10 @@ const WidgetCustomization = ({ showWidget, close }) => {
 };
 
 WidgetCustomization.propTypes = {
-  showWidget: PropTypes.bool.isRequired,
+  showCustomization: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,
+  categoryId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
 };
 
 export default WidgetCustomization;

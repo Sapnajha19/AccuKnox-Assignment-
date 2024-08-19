@@ -8,21 +8,22 @@ import PropTypes from "prop-types";
 
 const Dashboard = ({ searchQuery }) => {
   const [showAddWidget, setShowAddWidget] = useState(false);
-  const [showWidget, setShowWidget] = useState(false);
+  const [showCustomization, setShowCustomization] = useState(false);
   const [categoryId, setCategoryId] = useState(null);
   const categories = useSelector((state) => state.widget.categories);
-  const handleAddWidget = (id) => {
+  const handleWidgetAddition = (id) => {
     setCategoryId(id);
     setShowAddWidget(true);
   };
-  const handleShowWidget = () => {
-    setShowWidget(true);
+  const handleCustomization = (id) => {
+    setCategoryId(id);
+    setShowCustomization(true);
   };
   const handleCancelWidgetAddition = () => {
     setShowAddWidget(false);
   };
-  const handleCancelWidgetDisplay = () => {
-    setShowWidget(false);
+  const handleCancelCustomization = () => {
+    setShowCustomization(false);
   };
   const trigger = (
     <button disabled>
@@ -51,7 +52,7 @@ const Dashboard = ({ searchQuery }) => {
         <div className="flex flex-row gap-4 items-center">
           <button
             className="p-1.5 bg-[#fff] border-[1.5px] border-gray-200 rounded-md"
-            onClick={()=>handleAddWidget(null)}
+            onClick={() => handleWidgetAddition(null)}
           >
             Add Widget +
           </button>
@@ -78,8 +79,8 @@ const Dashboard = ({ searchQuery }) => {
           <div key={item.id} className="flex flex-col mb-5 px-10">
             <Widget
               category={item}
-              open={() => handleAddWidget(item.id)}
-              customize={handleShowWidget}
+              open={() => handleWidgetAddition(item.id)}
+              customize={() => handleCustomization(item.id)}
             />
           </div>
         ))
@@ -92,8 +93,9 @@ const Dashboard = ({ searchQuery }) => {
         categoryId={categoryId}
       />
       <WidgetCustomization
-        showWidget={showWidget}
-        close={handleCancelWidgetDisplay}
+        showCustomization={showCustomization}
+        close={handleCancelCustomization}
+        categoryId={categoryId}
       />
     </div>
   );
