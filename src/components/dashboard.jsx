@@ -9,8 +9,10 @@ import PropTypes from "prop-types";
 const Dashboard = ({ searchQuery }) => {
   const [showAddWidget, setShowAddWidget] = useState(false);
   const [showWidget, setShowWidget] = useState(false);
+  const [categoryId, setCategoryId] = useState(null);
   const categories = useSelector((state) => state.widget.categories);
-  const handleAddWidget = () => {
+  const handleAddWidget = (id) => {
+    setCategoryId(id);
     setShowAddWidget(true);
   };
   const handleShowWidget = () => {
@@ -49,7 +51,7 @@ const Dashboard = ({ searchQuery }) => {
         <div className="flex flex-row gap-4 items-center">
           <button
             className="p-1.5 bg-[#fff] border-[1.5px] border-gray-200 rounded-md"
-            onClick={handleAddWidget}
+            onClick={()=>handleAddWidget(null)}
           >
             Add Widget +
           </button>
@@ -76,7 +78,7 @@ const Dashboard = ({ searchQuery }) => {
           <div key={item.id} className="flex flex-col mb-5 px-10">
             <Widget
               category={item}
-              open={handleAddWidget}
+              open={() => handleAddWidget(item.id)}
               customize={handleShowWidget}
             />
           </div>
@@ -87,6 +89,7 @@ const Dashboard = ({ searchQuery }) => {
       <AddWidget
         showAddWidget={showAddWidget}
         cancel={handleCancelWidgetAddition}
+        categoryId={categoryId}
       />
       <WidgetCustomization
         showWidget={showWidget}
