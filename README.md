@@ -7,27 +7,26 @@
 Clone this repository to your local machine using Git.
 
 ##
-        git clone https://github.com/your-username/your-repo-name.git
+    git clone https://github.com/your-username/your-repo-name.git
 
 
 ### 2. Navigate to the project directory
 
-Change to the project directory
 
 ## 
-        cd your-repo-name
+    cd repo-name
 
 
 ### 3. Install Dependencies
 
 ## 
-        npm install
+    npm install
 
 
 ### 4. Run the Development Server
 
 ##
-        npm run dev
+    npm run dev
 
 
 By default, the app will be available at http://localhost:5173. Open this URL in your browser to view the application.
