@@ -1,7 +1,10 @@
 import { Icon } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ searchQuery, onSearch }) => {
+  const handleSearchChange = (e) => {
+    onSearch(e.target.value);
+  };
 
   return (
     <div className="flex flex-row justify-between items-center w-full h-[40px]">
@@ -32,6 +35,8 @@ const Navbar = () => {
         <input
           placeholder="Search anything..."
           className="border border-[#b5ceea] bg-[#ebf1f7] text-sm rounded-md p-0.5 pl-8 w-[300px]"
+          value={searchQuery}
+          onChange={handleSearchChange}
         />
       </div>
     </div>

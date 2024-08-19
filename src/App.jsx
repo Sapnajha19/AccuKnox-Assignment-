@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Provider } from "react-redux";
 import "./App.css";
 import Dashboard from "./components/dashboard";
@@ -8,13 +9,20 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/home";
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
   return (
     <Provider store={appStore}>
       <Router>
-        <Navbar />
+        <Navbar searchQuery={searchQuery} onSearch={handleSearch} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={<Dashboard searchQuery={searchQuery} />}
+          />
         </Routes>
       </Router>
     </Provider>
